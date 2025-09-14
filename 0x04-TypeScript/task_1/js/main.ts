@@ -28,9 +28,10 @@ interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-function printTeacher(firstName: string, lastName: string): string {
-  return '${firstName.charAt(0)}. ${lastName}';
+// Implement the function with destructuring
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
+  return '${firstName}. ${lastName}';
 }
 
 // Example usage
-console.log(printTeacher("John", "Doe"));
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
