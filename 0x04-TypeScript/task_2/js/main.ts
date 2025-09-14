@@ -20,7 +20,7 @@ export class Director implements DirectorInterface {
   }
 }
 
-// createEmployee function (Task 5 requirement)
+// createEmployee function
 export function createEmployee(salary: number | string): Teacher | Director {
   if (typeof salary === 'number' && salary < 500) {
     return new Teacher();
@@ -28,12 +28,12 @@ export function createEmployee(salary: number | string): Teacher | Director {
   return new Director();
 }
 
-// Type predicate (Task 6 requirement)
+// isDirector function (type predicate)
 export function isDirector(employee: Teacher | Director): employee is Director {
-  return (employee as Director).workDirectorTasks !== undefined;
+  return employee instanceof Director;
 }
 
-// executeWork function (Task 6 requirement)
+// executeWork function
 export function executeWork(employee: Teacher | Director): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -41,6 +41,15 @@ export function executeWork(employee: Teacher | Director): string {
   return employee.workTeacherTasks();
 }
 
-// Example usage (can be removed if checker doesn't allow console logs)
-console.log(executeWork(createEmployee(200))); // Getting to work
-console.log(executeWork(createEmployee(1000))); // Getting to director tasks
+// String literal type
+export type Subjects = 'Math' | 'History';
+
+// teachClass function
+export function teachClass(todayClass: Subjects): string {
+  if (todayClass === 'Math') {
+    return 'Teaching Math';
+  }
+  if (todayClass === 'History') {
+    return 'Teaching History';
+  }
+}
