@@ -43,14 +43,18 @@ class Teacher implements TeacherInterface {
 }
 
 // Function createEmployee
-function createEmployee(salary: number | string): Teacher | Director {
+function createEmployee(salary: number | string): Director | Teacher {
   if (typeof salary === 'number' && salary < 500) {
     return new Teacher();
+  } else {
+    return new Director();
   }
-  return new Director();
 }
 
-// Example usage (you can comment out if checker doesn’t want runtime tests)
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee('$500'));
+export {
+  TeacherInterface,
+  DirectorInterface,
+  Director,
+  Teacher,
+  createEmployee,
+};
