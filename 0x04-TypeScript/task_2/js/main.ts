@@ -1,63 +1,60 @@
 // Teacher interface
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
+interface Teacher {
+  firstName: string;
+  lastName: string;
+  fullTimeEmployee: boolean;
+  location: string;
+  yearsOfExperience?: number;
 }
 
-// Director interface
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
+// Director interface extending Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;
 }
 
-// Class Director implementing DirectorInterface
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return 'Working from home';
-  }
-
-  getCoffeeBreak(): string {
-    return 'Getting a coffee break';
-  }
-
-  workDirectorTasks(): string {
-    return 'Getting to director tasks';
-  }
+// Function returning work string for Director
+function workDirectorTasks(): string {
+  return 'Getting to director tasks';
 }
 
-// Class Teacher implementing TeacherInterface
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return 'Cannot work from home';
-  }
-
-  getCoffeeBreak(): string {
-    return 'Cannot have a break';
-  }
-
-  workTeacherTasks(): string {
-    return 'Getting to work';
-  }
+// Function returning work string for Teacher
+function workTeacherTasks(): string {
+  return 'Getting to work';
 }
 
-// Function createEmployee
-function createEmployee(salary: number | string): Director | Teacher {
-  // The checker expects the exact text `if (salary < 500)`.
-  // I use @ts-ignore to silence the TypeScript error for that comparison.
-  // @ts-ignore
-  if (salary < 500) {
-    return new Teacher();
+// Create employee function (from Task 5 context)
+function createEmployee(salary: number | string): Teacher | Directors {
+  if (typeof salary === 'number' && salary < 500) {
+    return {
+      firstName: 'John',
+      lastName: 'Doe',
+      location: 'Abuja',
+      fullTimeEmployee: true,
+    } as Teacher;
   } else {
-    return new Director();
+    return {
+      firstName: 'Jane',
+      lastName: 'Smith',
+      location: 'Lagos',
+      fullTimeEmployee: true,
+      numberOfReports: 10,
+    } as Directors;
   }
 }
 
-export {
-  TeacherInterface,
-  DirectorInterface,
-  Director,
-  Teacher,
-  createEmployee,
-};
+// Type predicate to check if employee is a Director
+function isDirector(employee: Teacher | Directors): employee is Directors {
+  return (employee as Directors).numberOfReports !== undefined;
+}
+
+// Function executeWork
+function executeWork(employee: Teacher | Directors): string {
+  if (isDirector(employee)) {
+    return workDirectorTasks();
+  }
+  return workTeacherTasks();
+}
+
+// Example usage
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
