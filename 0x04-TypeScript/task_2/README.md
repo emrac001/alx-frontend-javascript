@@ -1,10 +1,9 @@
 ## Project Overview
 This project is part of the **ALX Frontend JavaScript - TypeScript module**.  
-The goal is to add a new Directors interface using:
+The goal is to:
 
-interface Directors extends Teacher {
-  numberOfReports: number;
-}
+Create TeacherInterface and DirectorInterface.
 
+Define a Director class that implements DirectorInterface.
 
-Demonstrated its use with director1.
+Write a createEmployee function.

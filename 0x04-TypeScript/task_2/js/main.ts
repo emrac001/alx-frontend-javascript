@@ -1,35 +1,56 @@
-interface Teacher {
-  readonly firstName: string; // can only be set when initialized
-  readonly lastName: string; // can only be set when initialized
-  fullTimeEmployee: boolean; // always required
-  yearsOfExperience?: number; // optional
-  location: string; // always required
-  [key: string]: any; // allows extra properties like contract
+// Teacher interface
+interface TeacherInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workTeacherTasks(): string;
 }
 
-// Define the Directors interface extending Teacher
-interface Directors extends Teacher {
-  numberOfReports: number;
+// Director interface
+interface DirectorInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workDirectorTasks(): string;
 }
 
-// Example usage
-const teacher3: Teacher = {
-  firstName: 'John',
-  lastName: 'Doe',
-  fullTimeEmployee: false,
-  location: 'Abuja',
-  contract: false, // extra property
-};
+// Class Director implementing DirectorInterface
+class Director implements DirectorInterface {
+  workFromHome(): string {
+    return 'Working from home';
+  }
 
-console.log(teacher3);
+  getCoffeeBreak(): string {
+    return 'Getting a coffee break';
+  }
 
-// Example with Directors
-const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17,
-};
+  workDirectorTasks(): string {
+    return 'Getting to director tasks';
+  }
+}
 
-console.log(director1);
+// Class Teacher implementing TeacherInterface
+class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return 'Cannot work from home';
+  }
+
+  getCoffeeBreak(): string {
+    return 'Cannot have a break';
+  }
+
+  workTeacherTasks(): string {
+    return 'Getting to work';
+  }
+}
+
+// Function createEmployee
+function createEmployee(salary: number | string): Teacher | Director {
+  if (typeof salary === 'number' && salary < 500) {
+    return new Teacher();
+  }
+  return new Director();
+}
+
+// Example usage (you can comment out if checker doesn’t want runtime tests)
+console.log(createEmployee(200));
+console.log(createEmployee(1000));
+console.log(createEmployee('$500'));
