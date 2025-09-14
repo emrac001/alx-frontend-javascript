@@ -51,4 +51,3 @@ export function teachClass(todayClass: Subjects): string {
   }
   return 'Teaching History';
 }
-
