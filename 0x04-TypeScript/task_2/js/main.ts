@@ -42,12 +42,14 @@ export function executeWork(employee: Teacher | Director): string {
 }
 
 // String literal type
-export type Subjects = 'Math' | 'History';
+export type Subjects = "Math" | "History";
 
 // teachClass function
-export function teachClass(todayClass: Subjects): string {
-  if (todayClass === 'Math') {
-    return 'Teaching Math';
+export function teachClass(todayClass:Subjects): string {
+  if (todayClass === "Math") {
+    return "Teaching Math";
+  } else {
+    return "Teaching History";
   }
-  return 'Teaching History';
 }
+
