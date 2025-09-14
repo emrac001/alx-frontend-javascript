@@ -30,7 +30,7 @@ interface printTeacherFunction {
 
 // Implement the function with destructuring
 function printTeacher({ firstName, lastName }: { firstName: string; lastName: string }): string {
-  return '${firstName}. ${lastName}';
+  return `${firstName}. ${lastName}`;
 }
 
 // Example usage
