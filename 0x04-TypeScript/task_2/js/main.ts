@@ -49,7 +49,5 @@ export function teachClass(todayClass: Subjects): string {
   if (todayClass === 'Math') {
     return 'Teaching Math';
   }
-  if (todayClass === 'History') {
-    return 'Teaching History';
-  }
+  return 'Teaching History';
 }
